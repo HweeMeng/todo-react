@@ -20,6 +20,8 @@ class App extends React.Component {
             todo:this.state.todo
         }
         this.setState(currentState);
+        var inputGetter = document.getElementById('input')
+        inputGetter.value ="";
     }
 
     changeHandler(event){
@@ -41,7 +43,7 @@ class App extends React.Component {
         })
         return (
         <div>
-            <input onChange={(event)=>{this.changeHandler(event);}}/>
+            <input onChange={(event)=>{this.changeHandler(event);}} id='input'/>
             <button onClick={()=>{this.clickHandler()}}>click me!</button>
             <br></br>
             <br></br>
