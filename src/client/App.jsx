@@ -35,15 +35,17 @@ class App extends React.Component {
         const todoMapper = this.state.todo.map((todo, index)=>{
             return(
                 <div>
-                    {todo}
+                    {(index + 1)}. {todo}
                 </div>
                 )
         })
         return (
         <div>
-            Welcome.
             <input onChange={(event)=>{this.changeHandler(event);}}/>
             <button onClick={()=>{this.clickHandler()}}>click me!</button>
+            <br></br>
+            <br></br>
+            <h3>Below is your todo!</h3>
             {todoMapper}
         </div>
         );
