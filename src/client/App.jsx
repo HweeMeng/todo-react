@@ -1,54 +1,45 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
+import moment from 'moment';
+import Form from 'form';
+import Display from 'display';
 
 class App extends React.Component {
     constructor(){
       super()
 
       this.state = {
-        holder:"",
-        todo : []
+        holder1:"",
+        todo1 : []
       }
     }
-    clickHandler(){
-        console.log('yay this button is working!')
-        var entry = this.state.holder
-        this.state.todo.push(entry);
-        console.log('todo array: ', this.state.todo)
+
+    setTodo(){
+        console.log('this.state.ho.der in settodo: ', this.state.holder1)
+        console.log('todo1 array inside settodo: ', this.state.todo1)
+        console.log('todo array inside settodo: ', this.state.todo)
+        console.log('set todo called!! event target value', event.target.value)
+        var entry = (this.state.holder1 + "     " + "<Entry date>: " + moment().format())
+        this.state.todo1.push(entry);
         var currentState = {
             holder:"",
-            todo:this.state.todo
-        }
-        this.setState(currentState);
-        var inputGetter = document.getElementById('input')
-        inputGetter.value ="";
+            todo1:this.state.todo1
+        };
+        this.setState({currentState});
     }
 
-    changeHandler(event){
-      console.log("change", event.target.value);
-      this.state.holder = event.target.value
-      console.log("this.state.holder", this.state.holder)
+    setHolder(){
+        this.state.holder1 = event.target.value;
+        console.log('this is set holder getting info from child: ', this.state.holder1)
     }
-
-    // }
 
     render() {
-        console.log('rendering side, todo array: ', this.state.todo)
-        const todoMapper = this.state.todo.map((todo, index)=>{
-            return(
-                <div>
-                    {(index + 1)}. {todo}
-                </div>
-                )
-        })
+        console.log('rendering app: ', this.state)
         return (
         <div>
-            <input onChange={(event)=>{this.changeHandler(event);}} id='input'/>
-            <button onClick={()=>{this.clickHandler()}}>click me!</button>
+            <Form setTodo = {()=>{ this.setTodo() }} setHolder={()=>{ this.setHolder() }}/>
             <br></br>
-            <br></br>
-            <h3>Below is your todo!</h3>
-            {todoMapper}
+            <Display todo={this.state.todo1}/>
         </div>
         );
     }
